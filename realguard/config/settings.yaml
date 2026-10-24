@@ -1,0 +1,63 @@
+# RealGuard Central Configuration
+# Every tunable value lives here — never hardcode thresholds in engine code.
+
+network:
+  interface: "Ethernet"          # change to your VM's interface (check with `ip a`)
+  capture_filter: "ip"       # BPF filter, e.g. "ip" captures all IPv4 traffic
+  window_seconds: 5          # feature extraction time window
+
+rule_engine:
+  port_scan:
+    unique_ports_threshold: 15     # unique dest ports from one source within window
+  brute_force:
+    failed_attempts_threshold: 5   # failed conns to same port within window
+  high_packet_rate:
+    packets_per_sec_threshold: 500
+  large_upload:
+    bytes_out_threshold: 5000000   # 5 MB per window from one source
+
+statistical_engine:
+  zscore_threshold: 3.0            # flag if traffic deviates > 3 std devs from baseline
+  baseline_window_minutes: 10      # rolling window used to compute "normal"
+
+ml_engine:
+  primary_model: "one_class_svm"
+  comparison_model: "isolation_forest"
+  contamination: 0.05              # expected proportion of anomalies in training data
+  model_dir: "ml/models/"
+
+risk_scoring:
+  weights:
+    rule_engine: 0.35
+    statistical_engine: 0.25
+    ml_engine: 0.40
+  thresholds:
+    low: 25
+    medium: 50
+    high: 75
+    critical: 100
+
+database:
+  path: "db/realguard.db"
+
+response:
+  auto_block_enabled: true
+  auto_block_threshold: 75          # risk score that triggers auto-block (High+)
+  dry_run: true                     # if true, logs the block action instead of executing it
+
+email:
+  enabled: false
+  smtp_server: "smtp.gmail.com"
+  smtp_port: 587
+  sender_email: "youremail@gmail.com"
+  app_password: ""                  # use an app password, never your real password
+  recipients:
+    - "analyst@example.com"
+
+retraining:
+  min_feedback_samples: 100         # minimum labeled samples before retraining is suggested
+  feedback_db_path: "db/feedback.db"
+
+logging:
+  level: "INFO"
+  log_file: "logs/realguard.log"
