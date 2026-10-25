@@ -261,7 +261,7 @@ Only `PyYAML` is needed for these two. The sniffer can also be run on its own (a
 - [ ] Response layer: auto-block (dry-run first) and email alerts
 - [ ] SQLite persistence for events and analyst feedback, with a retraining workflow
 - [ ] Stateful flow tracking across windows and true TCP handshake tracking
-- [ ] SOC dashboard (Streamlit) for alerts, drill-downs, filtering and CSV export, developed as a separate frontend layer on top of the backend
+- [ ] SOC dashboard (Streamlit) covering alerts, devices, incident investigation and reports, built on the SQLite database
 - [ ] Automated unit tests and CI
 
 ## Security and ethical use
@@ -270,14 +270,21 @@ RealGuard captures network traffic, which can include sensitive data. Only run i
 
 ## Team
 
-Developed by **Team B4**, batch **2023-27**, under the **VAST-CSE** organisation.
+**Group 4**, batch **2023-27**, Department of Computer Science and Engineering, **Vidya Academy of Science and Technology, Thrissur**.
 
-| Name | Role |
+**Guided by:** Dr. Arjun K P
+
+| Member | Role |
 |---|---|
-| _Add team member_ | _e.g. Capture and feature engineering_ |
-| _Add team member_ | _e.g. Detection engines_ |
-| _Add team member_ | _e.g. Dashboard / frontend_ |
+| **Hrishikesh K B** | Backend and core pipeline |
+| **Devika Madhavankutty** | System architecture and documentation |
+| **Gopika Binish K** | Detection engine and machine learning |
+| **Mayukh Ramesh** | Dashboard and database |
 
 ## License
 
 No license file has been added to this repository yet. Until one is added, all rights are reserved by the authors. Add a `LICENSE` file (for example MIT or Apache-2.0) to specify the terms for reuse.
+
+## Acknowledgements
+
+Thanks to our guide, Dr. Arjun K P, and the Department of Computer Science and Engineering, Vidya Academy of Science and Technology, Thrissur, for their guidance and support.
